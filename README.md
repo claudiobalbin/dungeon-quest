@@ -14,4 +14,4 @@ You don't know exactly where you are or when you are, but its clear that the onl
 
 # License
 
-Dungeon Quest is licensed GNU GPL version 2. See the COPYING file for details.
+Dungeon Quest is licensed under GNU GPL version 2
