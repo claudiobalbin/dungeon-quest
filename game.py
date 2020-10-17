@@ -2,8 +2,10 @@ import os
 import time
 import platform
 from pynput.keyboard import Key, Listener
-# from pynput import keyboard
 from termcolor import colored
+import pandas as pd
+import json
+import numpy as np
 
 def clear_term():
     if platform.system() == 'Windows':
@@ -15,55 +17,55 @@ def clear_term():
 #     print('{0} pressed'.format(
 #         key))
 
+def render_screen():
+    """Render the screen considering background, itens and player"""
+    back = np.loadtxt("maps/0101.txt", delimiter=",")
+
+    for y in range(0, back.shape[0]):
+        for x in range(0, back.shape[1]):
+            if player_x == x and player_y == y:
+                print(translate_char(2), end = '')
+            else:
+                print(translate_char(back[y,x]), end ='')
+            pass
+        print()
+        pass
+
+
+def translate_char(x):
+    """Receves a number and return the corresponding character for map rendering"""
+    df = pd.read_csv('char_dictionary.csv' ,sep=';')
+    char = df.loc[df['number'] == x].values[0,1]
+    return char
+
+
 def on_release(key):
+    """Deals with the keystroke"""
     global player_x
-    # print('{0} release'.format(
-    #     key))
+    global player_y
     if key == Key.esc:
         # Stop listener
         print('Exiting the game...')
         return False
-    if key == Key.right and player_x < 20:
+    if key == Key.right and player_x < 8:
         player_x = player_x + 1
-    if key == Key.left and player_x > 0:
+    if key == Key.left and player_x > 1:
         player_x = player_x - 1
-    print(colored(player_x, 'green'))
+    if key == Key.down and player_y < 4:
+        player_y = player_y + 1
+    if key == Key.up and player_y > 1:
+        player_y = player_y - 1
+    clear_term()
+    render_screen()
+    # print(player_x)
+    # print(colored(player_x, 'green'))
 
 
-player_x = 0
+player_x = 1
+player_y = 1
 
 # Collect events until released
 with Listener(
         # on_press=on_press,
         on_release=on_release, suppress=True) as listener:
     listener.join()
-
-# ...or, in a non-blocking fashion:
-
-# # print("Loading game...")
-# # time.sleep(2)
-# # key_name = ""
-# player = "@"
-# print(player)
-
-
-# while True:  # making a loop
-#     try:  # used try so that if user pressed other than the given key error will not be shown
-#         player_new = player
-
-#         if keyboard.is_pressed('q') or keyboard.is_pressed('esc'):  # if key 'q' is pressed
-#             print('Exiting...')
-#             break  # finishing the loop
-#         elif keyboard.is_pressed('right') and len(player) < 40:
-#             player_new = " " + player
-#         elif keyboard.is_pressed('left') and len(player) > 1:
-#             player_new = player[1:]
-
-#         if (player != player_new):
-#             clear_term()
-#             player = player_new
-#             print(player)
-
-#     except Exception as e:
-#         print('Error detected, exiting the game: '+ str(e))
-#         break  # if user pressed a key other than the given key the loop will break
