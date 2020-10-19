@@ -25,6 +25,8 @@ def translate_char(x):
     """Receves a number and return the corresponding character for map rendering"""
     df = pd.read_csv('char_dictionary.csv' ,sep=';')
     char = df.loc[df['number'] == x].values[0,1]
+    if '\\' in char:
+        char = bytes(char, 'utf-8').decode("unicode-escape")
     return char
 
 # constants

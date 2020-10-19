@@ -1,4 +1,11 @@
-number;char;solid
-0; ;0
-1;#;1
-2;@;1
+number;char;solid;description
+0; ;0;void
+1;.;0;switch
+2;\u2657;1;player
+3;#;1;gate
+5;\u2550;1;horizontal wall
+6;\u2551;1;vertical wall
+7;\u2554;1;upper left corner
+8;\u2557;1;upper right corner
+9;\u255a;1;inferior left corner
+10;\u255d;1;inferior right corner
