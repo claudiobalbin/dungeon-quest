@@ -12,6 +12,12 @@ You don't know exactly where you are or when you are, but its clear that the onl
 * `Arrows` - movement
 * `Space` - interactions
 
+# Running
+
+```python
+python3 game.py
+```
+
 # Running with Docker
 
 ```docker
