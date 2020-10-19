@@ -1,35 +1,24 @@
-import os
-import time
-import platform
-from pynput.keyboard import Key, Listener
-from termcolor import colored
 import pandas as pd
-import json
 import numpy as np
+import curses
 
-def clear_term():
-    if platform.system() == 'Windows':
-        os.system("cls")
-    else:
-        os.system("clear")
-
-# def on_press(key):
-#     print('{0} pressed'.format(
-#         key))
-
-def render_screen():
+def render_screen(window):
     """Render the screen considering background, itens and player"""
     back = np.loadtxt("maps/0101.txt", delimiter=",")
 
     for y in range(0, back.shape[0]):
         for x in range(0, back.shape[1]):
             if player_x == x and player_y == y:
-                print(translate_char(2), end = '')
+                # print(translate_char(2), end = '')
+                window.addstr(y, x, translate_char(2))
             else:
-                print(translate_char(back[y,x]), end ='')
+                # print(translate_char(back[y,x]), end ='')
+                window.addstr(y, x, translate_char(back[y,x]))
             pass
-        print()
+        # print()
         pass
+
+    window.refresh()
 
 
 def translate_char(x):
@@ -38,34 +27,29 @@ def translate_char(x):
     char = df.loc[df['number'] == x].values[0,1]
     return char
 
-
-def on_release(key):
-    """Deals with the keystroke"""
-    global player_x
-    global player_y
-    if key == Key.esc:
-        # Stop listener
-        print('Exiting the game...')
-        return False
-    if key == Key.right and player_x < 8:
-        player_x = player_x + 1
-    if key == Key.left and player_x > 1:
-        player_x = player_x - 1
-    if key == Key.down and player_y < 4:
-        player_y = player_y + 1
-    if key == Key.up and player_y > 1:
-        player_y = player_y - 1
-    clear_term()
-    render_screen()
-    # print(player_x)
-    # print(colored(player_x, 'green'))
-
-
+# constants
 player_x = 1
 player_y = 1
+WIDTH = 10
+HEIGHT = 6
 
-# Collect events until released
-with Listener(
-        # on_press=on_press,
-        on_release=on_release, suppress=True) as listener:
-    listener.join()
+def main(stdscr):
+    global player_x
+    global player_y
+    while True:
+        render_screen(stdscr)
+        c = stdscr.getch()
+        if c == curses.KEY_RIGHT and player_x < WIDTH - 2:
+            player_x = player_x + 1
+        elif c == curses.KEY_LEFT and player_x > 1:
+            player_x = player_x - 1
+        elif c == curses.KEY_DOWN and player_y < HEIGHT - 2:
+            player_y = player_y + 1
+        elif c == curses.KEY_UP and player_y > 1:
+            player_y = player_y - 1
+        elif c == ord('c'):
+            stdscr.clear()
+        elif c == ord('q'):
+            break  # Exit the while loop
+
+curses.wrapper(main)
