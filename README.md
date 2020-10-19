@@ -12,6 +12,12 @@ You don't know exactly where you are or when you are, but its clear that the onl
 * `Arrows` - movement
 * `Space` - interactions
 
+# Running with Docker
+
+```docker
+docker run -it --rm --name dungeon-quest -v "$PWD":/usr/src/myapp -w /usr/src/myapp amancevice/pandas python game.py
+```
+
 # License
 
 Dungeon Quest is licensed under GNU GPL version 2
