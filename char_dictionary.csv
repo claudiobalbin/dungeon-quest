@@ -1,11 +1,14 @@
-number;char;solid;description
-0; ;0;void
-1;.;0;switch
-2;\u2657;1;player
-3;#;1;gate
-5;\u2550;1;horizontal wall
-6;\u2551;1;vertical wall
-7;\u2554;1;upper left corner
-8;\u2557;1;upper right corner
-9;\u255a;1;inferior left corner
-10;\u255d;1;inferior right corner
+number;char;solid;description;color
+0; ;0;void;0
+1;.;0;switch;0
+2;\u2657;1;player;0
+3;#;1;wall;0
+4;x;1;gate;0
+5;\u2550;1;horizontal wall;0
+6;\u2551;1;vertical wall;0
+7;\u2554;1;upper left corner;0
+8;\u2557;1;upper right corner;0
+9;\u255a;1;inferior left corner;0
+10;\u255d;1;inferior right corner;0
+11;\u2566;1;upper intersection;0
+12;\u2569;1;inferior intersection;0

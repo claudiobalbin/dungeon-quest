@@ -1,0 +1,8 @@
+#unicode box table
+https://en.wikipedia.org/wiki/Box_Drawing_(Unicode_block)
+
+#unicode table general
+https://en.wikipedia.org/wiki/List_of_Unicode_characters
+
+#curses library
+https://docs.python.org/3/howto/curses.html

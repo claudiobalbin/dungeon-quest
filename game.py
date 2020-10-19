@@ -9,15 +9,16 @@ def render_screen(window):
     for y in range(0, back.shape[0]):
         for x in range(0, back.shape[1]):
             if player_x == x and player_y == y:
-                # print(translate_char(2), end = '')
-                window.addstr(y, x, translate_char(2))
+                window.addstr(y, x, translate_char(2), curses.color_pair(1))
             else:
-                # print(translate_char(back[y,x]), end ='')
                 window.addstr(y, x, translate_char(back[y,x]))
             pass
-        # print()
         pass
 
+    #menus
+    window.addstr(1, 21, "q:exit")
+    window.addstr(3, 21, "arrows")
+    window.addstr(4, 22, "move")
     window.refresh()
 
 
@@ -29,15 +30,22 @@ def translate_char(x):
         char = bytes(char, 'utf-8').decode("unicode-escape")
     return char
 
+
 # constants
 player_x = 1
 player_y = 1
-WIDTH = 10
-HEIGHT = 6
+WIDTH = 20
+HEIGHT = 12
 
 def main(stdscr):
     global player_x
     global player_y
+
+    curses.start_color()
+    curses.use_default_colors()
+    curses.init_pair(1, curses.COLOR_GREEN, -1)
+    curses.curs_set(False)
+
     while True:
         render_screen(stdscr)
         c = stdscr.getch()
