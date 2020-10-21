@@ -43,7 +43,10 @@ def main(stdscr):
 
     curses.start_color()
     curses.use_default_colors()
-    curses.init_pair(1, curses.COLOR_GREEN, -1)
+    curses.init_pair(1, 1, -1)
+    curses.init_pair(2, 2, -1)
+    curses.init_pair(3, 3, -1)
+    curses.init_pair(4, 4, -1)
     curses.curs_set(False)
 
     while True:

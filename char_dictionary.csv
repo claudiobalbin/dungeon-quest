@@ -1,9 +1,9 @@
 number;char;solid;description;color
 0; ;0;void;0
-1;.;0;switch;0
-2;\u2657;1;player;0
-3;#;1;wall;0
-4;x;1;gate;0
+1;.;0;switch;3
+2;\u2657;1;player;4
+3;#;1;wall;2
+4;x;1;gate;1
 5;\u2550;1;horizontal wall;0
 6;\u2551;1;vertical wall;0
 7;\u2554;1;upper left corner;0
