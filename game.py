@@ -4,15 +4,25 @@ import curses
 
 def render_screen(window):
     """Render the screen considering background, itens and player"""
-    back = np.loadtxt("maps/0101.txt", delimiter=",")
+    global back_arr
 
-    for y in range(0, back.shape[0]):
-        for x in range(0, back.shape[1]):
-            if player_x == x and player_y == y:
-                window.addstr(y, x, translate_char(2), curses.color_pair(1))
-            else:
-                window.addstr(y, x, translate_char(back[y,x]))
+    if back_arr.size == 0:
+        back_arr = np.loadtxt("maps/0101.txt", delimiter=",")
+
+    try:
+        for y in range(0, back_arr.shape[0]):
+            for x in range(0, back_arr.shape[1]):
+                if player_x == x and player_y == y:
+                    window.addstr(y, x, translate_char(2), curses.color_pair(4))
+                else:
+                    window.addstr(y, x, translate_char(back_arr[y,x]))
+                pass
             pass
+        pass
+    except Exception as ex:
+        # print('Msg de Erro: ' + str(ex))
+        # TODO: running the game from vscode generates an exception in line 18,
+        # so this try/except is to workaround it for now
         pass
 
     #menus
@@ -40,6 +50,7 @@ player_y = 1
 WIDTH = 20
 HEIGHT = 12
 char_df = pd.DataFrame()
+back_arr = np.array([])
 
 def main(stdscr):
     global player_x
