@@ -24,8 +24,11 @@ def render_screen(window):
 
 def translate_char(x):
     """Receves a number and return the corresponding character for map rendering"""
-    df = pd.read_csv('char_dictionary.csv' ,sep=';')
-    char = df.loc[df['number'] == x].values[0,1]
+    global char_df
+    
+    if char_df.empty:
+        char_df = pd.read_csv('char_dictionary.csv' ,sep=';')
+    char = char_df.loc[char_df['number'] == x].values[0,1]
     if '\\' in char:
         char = bytes(char, 'utf-8').decode("unicode-escape")
     return char
@@ -36,6 +39,7 @@ player_x = 1
 player_y = 1
 WIDTH = 20
 HEIGHT = 12
+char_df = pd.DataFrame()
 
 def main(stdscr):
     global player_x
