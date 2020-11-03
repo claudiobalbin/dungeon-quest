@@ -24,6 +24,12 @@ python3 game.py
 docker run -it --rm --name dungeon-quest -v "$PWD":/usr/src/myapp -w /usr/src/myapp amancevice/pandas python game.py
 ```
 
+# TODOs
+
+- Dinamic colision
+- Color through char table
+- Map rendering bug inside VSCODE terminal
+
 # License
 
 Dungeon Quest is licensed under GNU GPL version 2
